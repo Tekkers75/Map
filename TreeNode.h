@@ -1,6 +1,6 @@
 #pragma once
 
-//@author Maltseva K.V.
+// @author Саранчин К.А.
 
 #include <cassert>
 #include <queue>

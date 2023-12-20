@@ -1,4 +1,5 @@
-﻿#include <string>
+﻿// @author Саранчин К.А.
+#include <string>
 #include <iostream>
 #include "Map.h"
 #include "Test.h"

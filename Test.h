@@ -1,5 +1,5 @@
 #pragma once
-
+// @author Саранчин К.А.
 #include <cassert>
 #include "Map.h"
 #include <string>
