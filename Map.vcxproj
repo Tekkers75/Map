@@ -133,6 +133,7 @@
     <ClInclude Include="AVLTree.h" />
     <ClInclude Include="AVLTreeNode.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="Test.h" />
     <ClInclude Include="TreeNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

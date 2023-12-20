@@ -7,9 +7,8 @@ protected:
     K key;
 public:
     T value;
-    KeyValue() : key(), value() {} // Конструктор по умолчанию с инициализацией
+    KeyValue() : key(), value() {} 
 
-    //KeyValue(K KeyValue, T datavalue);
     KeyValue(const K& key, const T& value) : key(key), value(value) {}
     KeyValue<K, T>& operator=(const KeyValue<K, T>& other) {
         if (this != &other) {
@@ -18,22 +17,6 @@ public:
         }
         return *this;
     }
-
-   /* bool operator==(const KeyValue<K, T>& other) const {
-        return (key == other.key) && (value == other.value);
-    }
-
-    bool operator<(const KeyValue<K, T>& other) const {
-        if (key == other.key) {
-            return value < other.value;
-        }
-        return key < other.key;
-    }
-
-
-    bool operator>(const KeyValue<K, T>& other) const {
-        return !(*this < other);
-    }*/
 
     bool operator==(const KeyValue<K, T>& other) const {
         return key == other.key;
@@ -68,6 +51,18 @@ public:
         AVLTree<KeyValue<K, T>>::Insert(keyValue);
     }
 
+    void Update(const K& key, const T& value) {
+        KeyValue<K, T> keyValue(key, value);
+        AVLTreeNode<KeyValue<K, T>>* node = AVLTree<KeyValue<K, T>>::Find(keyValue);
+        if (node != nullptr) {
+            node->data.value = value;  // Обновляем значение существующего элемента
+            cout << "Значение ключа" << " " << key << " " << "успешно обновлено" << endl;
+        }
+        else {
+            cout << "Ключ не найден" << endl;
+        }
+    }
+
     void Remove(const K& key) {
         KeyValue<K, T> keyValue(key, T());
         AVLTreeNode<KeyValue<K, T>>* node = AVLTree<KeyValue<K, T>>::Find(keyValue);
@@ -85,7 +80,7 @@ public:
         if (node != nullptr) {
             return node->data.value;
         }
-        cout << "Ключ не найден" << endl;
+        /*cout << "Ключ не найден" << endl;*/
         return T();
     }
 

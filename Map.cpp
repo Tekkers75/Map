@@ -1,6 +1,7 @@
 ﻿#include <string>
 #include <iostream>
 #include "Map.h"
+#include "Test.h"
 
 
 using namespace std;
@@ -11,7 +12,8 @@ int main() {
     map.Insert(42, 6);
     map.Insert(55, 12);
     map.Insert(17, 3);
-
+    map.Insert(17, 10);
+    map.Update(17, 55);
     map.Remove(55);
     int b;
     bool a = map.Find(b = 43);
@@ -30,6 +32,13 @@ int main() {
 
 
     map.PrintTreeAVL();
+
+    TestMapInsert();
+    TestMapRemove();
+    TestMapGet();
+    TestMapFind();
+    TestMapPrintTreeAVL();
+
 
     /* dict.Remove(55);
      dict.PrintTreeAVL();*/
