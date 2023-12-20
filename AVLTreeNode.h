@@ -1,10 +1,7 @@
 #pragma once
 
 //@author Саранчин К.А.
-
 #include"TreeNode.h"
-
-
 //узел AVL-дерева   
 template <class T>
 class AVLTreeNode :public TreeNode<T> {

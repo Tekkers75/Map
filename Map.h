@@ -19,7 +19,7 @@ public:
         return *this;
     }
 
-    bool operator==(const KeyValue<K, T>& other) const {
+   /* bool operator==(const KeyValue<K, T>& other) const {
         return (key == other.key) && (value == other.value);
     }
 
@@ -33,6 +33,18 @@ public:
 
     bool operator>(const KeyValue<K, T>& other) const {
         return !(*this < other);
+    }*/
+
+    bool operator==(const KeyValue<K, T>& other) const {
+        return key == other.key;
+    }
+
+    bool operator<(const KeyValue<K, T>& other) const {
+        return key < other.key;
+    }
+
+    bool operator>(const KeyValue<K, T>& other) const {
+        return key > other.key;
     }
 
     K getkey() const
@@ -47,22 +59,9 @@ public:
 };
 
 template<class K, class T>
-class Dictionary :public AVLTree<KeyValue<K, T>> {
+class Map :public AVLTree<KeyValue<K, T>> {
 
 public:
-
-    /* T& operator[](const K& key) {
-         KeyValue<K, T> keyValue(key, T());
-         KeyValue<K, T>* result = AVLTree<KeyValue<K, T>>::Find(keyValue);
-         if (result) {
-             return result->value;
-         }
-         else {
-             KeyValue<K, T> newKeyValue(key, T());
-             AVLTree<KeyValue<K, T>>::Insert(newKeyValue);
-             return AVLTree<KeyValue<K, T>>::Find(newKeyValue)->data;
-         }
-     }*/
 
     void Insert(const K& key, const T& value) {
         KeyValue<K, T> keyValue(key, value);
@@ -71,7 +70,14 @@ public:
 
     void Remove(const K& key) {
         KeyValue<K, T> keyValue(key, T());
-        AVLTree<KeyValue<K, T>>::Remove(keyValue);
+        AVLTreeNode<KeyValue<K, T>>* node = AVLTree<KeyValue<K, T>>::Find(keyValue);
+        if (node != nullptr) {
+            AVLTree<KeyValue<K, T>>::Remove(node->data);
+            cout << "Элемент успешно удален" << endl;
+        }
+        else {
+            cout << "Ключ не найден" << endl;
+        }
     }
 
     T Get(const K& key) {
@@ -80,12 +86,12 @@ public:
             return node->data.value;
         }
         cout << "Ключ не найден" << endl;
-        return T(); // Возвращаем значение по умолчанию типа T
+        return T();
     }
 
-    bool Contains(const K& key) {
+    bool Find(const K& key) {
         KeyValue<K, T> keyValue(key, T());
-        return AVLTree<KeyValue<K, T>>::Search(keyValue) != nullptr;
+        return AVLTree<KeyValue<K, T>>::Find(keyValue) != nullptr;
     }
 
     void PrintTreeAVL() {

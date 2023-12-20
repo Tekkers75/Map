@@ -197,12 +197,12 @@ void PrintTree(TreeNode<T>* node, int level) {
     if (node != nullptr)
     {
         //печатать правое поддерево узла node
-        PrintTree(node->Right(), level + 1);
+        PrintTree(node->Left(), level);
         //выровн€ть текущий уровень и вывести поле данных
-        IndentBlanks(indentBlock * level);
+        //IndentBlanks(indentBlock * level);
         cout << node->data << endl;
         //печатать левое поддерево узла node
-        PrintTree(node->Left(), level + 1);
+        PrintTree(node->Right(), level);
     }
 }
 
@@ -238,24 +238,6 @@ TreeNode<T>* AddNode(TreeNode<T>* node, const T& item)
 
     return node;
 }
-//
-//template<class T>
-//int PrintArr(TreeNode<T>* t, T arr[], int i) {
-//    if (t == nullptr) {
-//        return i;
-//    }
-//    if (t->left != nullptr) {
-//        i = PrintArr(t->left, arr, i);
-//    }
-//
-//    arr[i] = t->data;
-//    i++;
-//
-//    if (t->right != nullptr) {
-//        i = PrintArr(t->right, arr, i);
-//    }
-//    return i;
-//}
 
 //печать дерева в массив
 template<class T>
@@ -294,28 +276,6 @@ TreeNode<T>* BinaryTreeFromVector(vector<T> vec) {
     PrintTree(root, 0);
 }
 
-
-////поиск узла по значению
-//template<class T>
-//bool Search(TreeNode<T>* node, const T& data) {
-//    if (node == nullptr) {
-//        // ƒерево пустое или достигнут конец ветки (лист без значени€)
-//        return false;
-//    }
-//
-//    if (data == node->data) {
-//        // «начение найдено в текущем узле
-//        return true;
-//    }
-//    else if (data < node->data) {
-//        // –екурсивно ищем значение в левом поддереве
-//        return Search(node->left, data);
-//    }
-//    else {
-//        // –екурсивно ищем значение в правом поддереве
-//        return Search(node->right, data);
-//    }
-//}
 
 //поиск узла по значению(вывод его уровн€)
 template<class T>

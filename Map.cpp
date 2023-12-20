@@ -7,27 +7,29 @@ using namespace std;
 int main() {
 
     setlocale(LC_ALL, "ru");
-    //Dictionary<int, string> dict;
-    Dictionary<int, int> dict;
-    ///*   dict.Insert(42, "Иван");
-    //   dict.Insert(55, "Филипп");
-    //   dict.Insert(17, "Савелий");*/
-    dict.Insert(42, 6);
-    dict.Insert(55, 12);
-    dict.Insert(17, 3);
-    dict.Insert(42, 6);
-    dict.Insert(55, 12);
-    dict.Insert(17, 3);
-    dict.Insert(42, 6);
-    dict.Insert(55, 12);
-    dict.Insert(17, 3);
+    Map<int, int> map;
+    map.Insert(42, 6);
+    map.Insert(55, 12);
+    map.Insert(17, 3);
 
-    //std::cout << "Поиск по ключу " << dict.Get(42) << std::endl;
+    map.Remove(55);
+    int b;
+    bool a = map.Find(b = 43);
+
+    if (a == true) {
+        cout << "Ключ" << " " << b << " " << "найден," << " ";
+        cout << "его значение: " << map.Get(b) << endl;
+    }
+    else {
+        cout << "Ключ" << " " << b << " " << "не найден" << " " << endl;
+    }
+
+   //cout << "Поиск по ключу " << dict.Get(42) << endl;
 
 
 
 
-    dict.PrintTreeAVL();
+    map.PrintTreeAVL();
 
     /* dict.Remove(55);
      dict.PrintTreeAVL();*/
