@@ -9,8 +9,9 @@ protected:
     K key; // Ключ
 public:
     T value; // Значение
-    KeyValue() : key(), value() {} 
+    KeyValue() : key(), value() {}
 
+    // Конструктор c параметрами ключ - значение
     KeyValue(const K& key, const T& value) : key(key), value(value) {}
     KeyValue<K, T>& operator=(const KeyValue<K, T>& other) {
         if (this != &other) {
@@ -19,24 +20,28 @@ public:
         }
         return *this;
     }
-
+    // Сравнение ключей
     bool operator==(const KeyValue<K, T>& other) const {
         return key == other.key;
     }
 
+    // Сравнение ключей <
     bool operator<(const KeyValue<K, T>& other) const {
         return key < other.key;
     }
 
+    // Сравнение ключей >
     bool operator>(const KeyValue<K, T>& other) const {
         return key > other.key;
     }
 
+    // Получения значения ключа
     K getkey() const
     {
         return key;
     };
 
+    // Оператор вывода в консоль
     friend std::ostream& operator<<(std::ostream& os, const KeyValue<K, T>& keyValue) {
         os << "Ключ: " << keyValue.key << ", Значение: " << keyValue.value;
         return os;
@@ -48,16 +53,16 @@ template<class K, class T>
 class Map : public AVLTree<KeyValue<K, T>> {
 
 public:
-    // Вставка элемента в дерево
+    // Вставка элемента в дерево, если ключ существует, то вставить новое значение не получится.
     void Insert(const K& key, const T& value) {
         KeyValue<K, T> keyValue(key, value);
         AVLTree<KeyValue<K, T>>::Insert(keyValue);
     }
 
-    // Обновление значения элемента по ключу
+    // Обновление значения элемента по ключу, если ключа нету, то обновить не получится.
     void Update(const K& key, const T& value) {
         KeyValue<K, T> keyValue(key, value);
-        AVLTreeNode<KeyValue<K, T>>* node = AVLTree<KeyValue<K, T>>::Find(keyValue);
+        AVLTreeNode<KeyValue<K, T>>* node = this->AVLTree<KeyValue<K, T>>::Find(keyValue);
         if (node != nullptr) {
             node->data.value = value;  // Обновляем значение существующего элемента
             cout << "Значение ключа " << key << " успешно обновлено" << endl;
@@ -80,7 +85,7 @@ public:
         }
     }
 
-    // Получение значения элемента по ключу
+    // Получение значения элемента по ключу,если ключа нету вернется дефолтное значение.
     T Get(const K& key) {
         AVLTreeNode<KeyValue<K, T>>* node = AVLTree<KeyValue<K, T>>::Find(KeyValue<K, T>(key, T()));
         if (node != nullptr) {
@@ -100,4 +105,12 @@ public:
     void PrintTreeAVL() {
         PrintTree(AVLTree<KeyValue<K, T>>::GetRoot(), 0);
     }
+
+    /// Todo количество узлов
+    // Подсчет узлов
+    int CountNode() {
+        //вызываем метод базового класса для подсчета пар значении в дереве
+        return CountNodes(AVLTree<KeyValue<K, T>>::GetRoot());
+    }
+
 };

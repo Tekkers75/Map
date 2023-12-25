@@ -89,3 +89,14 @@ void TestMapPrintTreeAVL() {
     map.PrintTreeAVL();
 }
 
+void TestCount() {
+    Map <int, string> map;
+
+    map.Insert(1, "1");
+    map.Insert(2, "2");
+    map.Insert(3, "3");
+
+    assert(map.CountNode() == 3);
+
+}
+

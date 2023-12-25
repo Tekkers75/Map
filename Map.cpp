@@ -39,6 +39,7 @@ int main() {
     TestMapGet();
     TestMapFind();
     TestMapPrintTreeAVL();
+    TestCount();
 
 
     /* dict.Remove(55);
